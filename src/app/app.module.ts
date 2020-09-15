@@ -1,3 +1,5 @@
+import { SummaryPipe } from './rating/summary.pipe';
+import { RatingService } from './rating.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -12,6 +14,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartService } from './cart.service';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
+import { RatingComponent } from './rating/rating.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 
 @NgModule({
@@ -26,17 +30,23 @@ import { ShippingComponent } from './shipping/shipping.component';
       { path: 'shipping', component: ShippingComponent },
     ])
   ],
-  declarations: [
+  declarations: [				
     AppComponent,
     TopBarComponent,
     ProductListComponent,
     ProductAlertsComponent,
     ProductDetailsComponent,
     CartComponent,
-    ShippingComponent
-  ],
+    ShippingComponent,
+    RatingComponent,
+    SummaryPipe,
+    FavoriteComponent
+   ],
   bootstrap: [ AppComponent ],
-  providers: [ CartService ]
+  providers: [
+     CartService,
+     RatingService
+   ]
 })
 export class AppModule { }
 

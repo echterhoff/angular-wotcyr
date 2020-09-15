@@ -121,5 +121,10 @@
       }
     }
   },
-  "defaultProject": "angular.io-example"
+  "defaultProject": "angular.io-example",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "css"
+    }
+  }
 }

@@ -12,6 +12,8 @@
     "@angular/platform-browser-dynamic": "9.1.12",
     "@angular/router": "9.1.12",
     "angular-in-memory-web-api": "0.11.0",
+    "bootstrap": "^4.5.2",
+    "bootstrap-icons": "^1.0.0",
     "jasmine-core": "3.5.0",
     "jasmine-marbles": "0.6.0",
     "rxjs": "6.5.5",

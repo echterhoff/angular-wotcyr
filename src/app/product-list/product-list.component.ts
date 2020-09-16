@@ -1,6 +1,9 @@
+import { FavoriteChangedEventArgs } from './../favorite/favorite.component';
 import { Component } from '@angular/core';
 
 import { products } from '../products';
+
+
 
 @Component({
   selector: 'app-product-list',
@@ -10,12 +13,20 @@ import { products } from '../products';
 export class ProductListComponent {
   products = products;
 
+  post = {
+    isFavorite: false
+  };
+
   share() {
     window.alert('The product has been shared!');
   }
 
   onNotify() {
     window.alert('You will be notified when the product goes on sale');
+  }
+
+  onFavoriteChanged(eventArgs: FavoriteChangedEventArgs) {
+    console.log('Favorite changed ', eventArgs);
   }
 }
 

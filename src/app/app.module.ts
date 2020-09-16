@@ -1,7 +1,9 @@
+import { TitleCasePipe } from './titleinput/title-case.pipe';
 import { SummaryPipe } from './rating/summary.pipe';
 import { RatingService } from './rating.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,11 +18,13 @@ import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import { RatingComponent } from './rating/rating.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { TitleinputComponent } from './titleinput/titleinput.component';
 
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
@@ -30,7 +34,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
       { path: 'shipping', component: ShippingComponent },
     ])
   ],
-  declarations: [				
+  declarations: [					
     AppComponent,
     TopBarComponent,
     ProductListComponent,
@@ -40,7 +44,9 @@ import { FavoriteComponent } from './favorite/favorite.component';
     ShippingComponent,
     RatingComponent,
     SummaryPipe,
-    FavoriteComponent
+    FavoriteComponent,
+    TitleinputComponent,
+    TitleCasePipe,
    ],
   bootstrap: [ AppComponent ],
   providers: [

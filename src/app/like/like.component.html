@@ -1,0 +1,9 @@
+<svg 
+  class="bi heart" width="32" height="32" fill="currentColor"
+  (click)="onClick($event)"
+  [class.liked]="isLiked"
+>
+  <use xlink:href="bootstrap-icons.svg#heart-fill"/>
+</svg>
+<span class="likeCounter">{{ likeCount }}</span>
+<ng-content select=".body"></ng-content>

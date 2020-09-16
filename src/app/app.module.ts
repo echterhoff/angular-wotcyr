@@ -19,6 +19,7 @@ import { ShippingComponent } from './shipping/shipping.component';
 import { RatingComponent } from './rating/rating.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { TitleinputComponent } from './titleinput/titleinput.component';
+import { LikeComponent } from './like/like.component';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { TitleinputComponent } from './titleinput/titleinput.component';
       { path: 'shipping', component: ShippingComponent },
     ])
   ],
-  declarations: [					
+  declarations: [						
     AppComponent,
     TopBarComponent,
     ProductListComponent,
@@ -47,6 +48,7 @@ import { TitleinputComponent } from './titleinput/titleinput.component';
     FavoriteComponent,
     TitleinputComponent,
     TitleCasePipe,
+    LikeComponent
    ],
   bootstrap: [ AppComponent ],
   providers: [

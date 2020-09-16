@@ -5,6 +5,9 @@
     <favorite [isFavorite]="post.isFavorite" (change)="onFavoriteChanged($event)"></favorite> <a [title]="product.name + ' details'" [routerLink]="['/products', productId]">
       {{ product.name }}
     </a>
+    <persohub-like [isLiked]="tweet.isLiked" [likeCount]="tweet.likeCount">
+      <ng-container class="body">{{ tweet.body }}</ng-container>
+    </persohub-like>
   </h3>
   <p *ngIf="product.description">
     Description: {{ product.description }}

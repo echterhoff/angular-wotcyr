@@ -8,20 +8,15 @@ export interface FavoriteChangedEventArgs{
 @Component({
   selector: 'favorite',
   templateUrl: './favorite.component.html',
-  styleUrls: ['./favorite.component.scss'],
+  styleUrls: ['./favorite.component.scss']
 })
-export class FavoriteComponent implements OnInit {
+export class FavoriteComponent {
   @Input('isFavorite') isActive: boolean = false;
-  @Output() change = new EventEmitter();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @Output('change') click = new EventEmitter();
 
   favtoggle(actualsvg: HTMLElement){
     this.isActive = !this.isActive;
-    this.change.emit({ newValue: this.isActive });
+    this.click.emit({ newValue: this.isActive });
   }
 
   

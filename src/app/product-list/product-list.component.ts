@@ -17,6 +17,12 @@ export class ProductListComponent {
     isFavorite: false
   };
 
+  tweet = {
+    isLiked: false,
+    body: 'This is some body stuff...',
+    likeCount: 10
+  };
+
   share() {
     window.alert('The product has been shared!');
   }

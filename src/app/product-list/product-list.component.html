@@ -12,7 +12,17 @@
   <p *ngIf="product.description">
     Description: {{ product.description }}
   </p>
+<style>
+  .courses {
+    color: green;
+    font-weight: bold;
+  }
+</style>
 
+<div *ngIf="tweet.likeCount > 0; then courses else nocourses" class="courses"></div>
+<ng-template #courses>Courses</ng-template>
+<ng-template #nocourses>NoCourses</ng-template>
+  
   <button (click)="share()">
     Share
   </button>
@@ -22,7 +32,7 @@
   (notify)="onNotify()">>
   </app-product-alerts>
 </div>
-
+<persohub-contact-form></persohub-contact-form>
 <!-- 
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

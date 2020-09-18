@@ -20,7 +20,7 @@ export class ProductListComponent {
   tweet = {
     isLiked: false,
     body: 'This is some body stuff...',
-    likeCount: 10
+    likeCount: 9
   };
 
   share() {

@@ -20,7 +20,10 @@ import { RatingComponent } from './rating/rating.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { TitleinputComponent } from './titleinput/titleinput.component';
 import { LikeComponent } from './like/like.component';
-
+import { PanelComponent } from './panel/panel.component';
+import { TrackbyComponent } from './trackby/trackby.component';
+import { InputFormatDirective } from './input-format.directive';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 @NgModule({
   imports: [
@@ -35,7 +38,7 @@ import { LikeComponent } from './like/like.component';
       { path: 'shipping', component: ShippingComponent },
     ])
   ],
-  declarations: [						
+  declarations: [											
     AppComponent,
     TopBarComponent,
     ProductListComponent,
@@ -48,7 +51,11 @@ import { LikeComponent } from './like/like.component';
     FavoriteComponent,
     TitleinputComponent,
     TitleCasePipe,
-    LikeComponent
+    LikeComponent,
+      PanelComponent,
+      TrackbyComponent,
+      InputFormatDirective,
+      ContactFormComponent
    ],
   bootstrap: [ AppComponent ],
   providers: [

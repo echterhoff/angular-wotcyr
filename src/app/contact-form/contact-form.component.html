@@ -1,0 +1,14 @@
+<h3>Contact Form</h3>
+<form>
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input required ngModel #firstNameVar="ngModel" name="firstNameName" id="firstNameId" (change)="log(firstNameVar)" type="text">
+    <div class="alert alert-danger" *ngIf="firstNameVar.touched && !firstNameVar.valid">First Name is invalid!</div>
+  </div>
+  <div class="form-group">
+    <label for="comment">Comment</label>
+    <textarea ngModel #comment="ngModel" name="comment" id="comment" (change)="log(comment)" cols="30" rows="10"></textarea>
+    <div class="alert alert-danger" *ngIf="comment.touched && !comment.valid"></div>
+  </div>
+  <button class="btn btn-primary">Submit</button>
+</form>

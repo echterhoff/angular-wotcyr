@@ -1,0 +1,7 @@
+<button (click)="onRefresh()">Refresh</button>
+<ul>
+  <li *ngFor="let data of listdata; index as i; trackBy: trackedList; last as lastElement; even as isEven">
+    {{ data.name }} <input [appInputFormat]="isEven ? 'upper' : 'lower'" type="text">
+    <div *ngIf="lastElement"><button (click)="addElement(data.id)">Add Element</button></div>
+  </li>
+</ul>

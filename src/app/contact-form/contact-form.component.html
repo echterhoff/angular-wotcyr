@@ -2,8 +2,18 @@
 <form>
   <div class="form-group">
     <label for="firstName">First Name</label>
-    <input required ngModel #firstNameVar="ngModel" name="firstNameName" id="firstNameId" (change)="log(firstNameVar)" type="text">
-    <div class="alert alert-danger" *ngIf="firstNameVar.touched && !firstNameVar.valid">First Name is invalid!</div>
+    <input 
+    required 
+    minlength="3"
+    maxlength="10"
+    pattern="[a-zA-Z]*"
+    ngModel 
+    #firstName="ngModel" name="firstNameName" id="firstNameId" (change)="log(firstName)" type="text">
+    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+      <div *ngIf="firstName.errors.required">First Name is invalid!</div>
+      <div *ngIf="firstName.errors.minlength">First Name should be minimum {{ firstName.errors.minlength.requiredLength }}. Currently only {{ firstName.errors.minlength.actualLength }} characters given!</div>
+      <div *ngIf="firstName.errors.pattern">First Name is simply wrong according to the requirements! Expected a string matching {{ firstName.errors.pattern.requiredPattern }}</div>
+    </div>
   </div>
   <div class="form-group">
     <label for="comment">Comment</label>

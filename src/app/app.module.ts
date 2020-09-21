@@ -24,6 +24,7 @@ import { PanelComponent } from './panel/panel.component';
 import { TrackbyComponent } from './trackby/trackby.component';
 import { InputFormatDirective } from './input-format.directive';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { ComplexFormComponent } from './complex-form/complex-form.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
       { path: 'shipping', component: ShippingComponent },
     ])
   ],
-  declarations: [											
+  declarations: [												
     AppComponent,
     TopBarComponent,
     ProductListComponent,
@@ -55,7 +56,8 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
       PanelComponent,
       TrackbyComponent,
       InputFormatDirective,
-      ContactFormComponent
+      ContactFormComponent,
+      ComplexFormComponent
    ],
   bootstrap: [ AppComponent ],
   providers: [

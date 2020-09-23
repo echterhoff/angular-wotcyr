@@ -3,9 +3,8 @@ import { SummaryPipe } from './rating/summary.pipe';
 import { RatingService } from './rating.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -25,6 +24,7 @@ import { TrackbyComponent } from './trackby/trackby.component';
 import { InputFormatDirective } from './input-format.directive';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ComplexFormComponent } from './complex-form/complex-form.component';
+import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 
 @NgModule({
   imports: [
@@ -39,7 +39,7 @@ import { ComplexFormComponent } from './complex-form/complex-form.component';
       { path: 'shipping', component: ShippingComponent },
     ])
   ],
-  declarations: [												
+  declarations: [													
     AppComponent,
     TopBarComponent,
     ProductListComponent,
@@ -57,7 +57,8 @@ import { ComplexFormComponent } from './complex-form/complex-form.component';
       TrackbyComponent,
       InputFormatDirective,
       ContactFormComponent,
-      ComplexFormComponent
+      ComplexFormComponent,
+      NewCourseFormComponent
    ],
   bootstrap: [ AppComponent ],
   providers: [

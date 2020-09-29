@@ -1,3 +1,4 @@
+import { PostService } from './services/post.service';
 import { TitleCasePipe } from "./titleinput/title-case.pipe";
 import { SummaryPipe } from "./rating/summary.pipe";
 import { RatingService } from "./rating.service";
@@ -63,7 +64,7 @@ import { PostsComponent } from "./posts/posts.component";
     PostsComponent,
   ],
   bootstrap: [AppComponent],
-  providers: [CartService, RatingService],
+  providers: [CartService, RatingService, PostService],
 })
 export class AppModule {}
 

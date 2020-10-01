@@ -2,7 +2,11 @@
   <h1>My Store</h1>
 </a>
 
-<a routerLink="/cart" class="button fancy-button">
+<a routerLink="/posts" class="button fancy-button" routerLinkActive="active"
+   [queryParams]="{ page: 1, order: 'newest'}">
+  <i class="material-icons">article</i>Posts
+</a>
+<a routerLink="/cart" class="button fancy-button" routerLinkActive="active">
   <i class="material-icons">shopping_cart</i>Checkout
 </a>
 

@@ -7,12 +7,8 @@
             (click)="updatePost(post)"
             class="btn-btn-default btn-sm">Update</button>
     <button
-            (click)="deletePost(post)"
+            (click)="deletePost(post, $event)"
             class="btn-btn-default btn-sm">Delete</button>
-    <h5 [title]="post.id">{{ post.id }}. {{ post.title }}</h5>
-    <p>{{ post.body }}</p>
-    <p>
-      <cite> User {{ post.userId }} </cite>
-    </p>
+    <h5 [title]="post.id">{{ post.id }}. <a [routerLink]="['/post', post.id, post.title]">{{ post.title }}</a></h5>
   </li>
 </ul>

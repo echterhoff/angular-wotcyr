@@ -1,8 +1,12 @@
+import { map, switchMap } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { BadInput } from './../common/error-handling/bad-input';
 import { NotFoundError } from './../common/error-handling/not-found-error';
 import { AppError } from './../common/error-handling/app-error';
 import { Post, PostService } from "./../services/post.service";
 import { Component, OnInit } from "@angular/core";
+import { AppErrorHandler } from '../common/error-handling/app-error-handler';
 
 @Component({
   selector: "persohub-posts",
@@ -11,89 +15,114 @@ import { Component, OnInit } from "@angular/core";
 })
 export class PostsComponent implements OnInit {
   posts: Post[];
-  constructor(private service: PostService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private service: PostService
+  ) { }
 
   ngOnInit() {
 
-    let sub = this.service.getPosts()
+    combineLatest([
+      this.route.paramMap,
+      this.route.queryParamMap
+    ]).pipe(
+      map((combined) => {
+        let id = combined[0].get('id');
+        let page = combined[1].get('page');
+
+        return this.service.getAll();
+      })
+    ).subscribe((combined) => {
+      console.log(combined);
+    }
+    );
+
+    let page = this.route.queryParamMap.subscribe(
+      (params) => { params.get('page'); }
+    );
+
+    let sub = this.service.getAll()
+      .subscribe((posts) => { this.posts = posts });
+  }
+
+  createPost(input: HTMLInputElement) {
+    let post: Post = {
+      id: -1,
+      title: input.value,
+      body: null,
+      userId: null
+    };
+    input.disabled = true;
+    this.posts.splice(0, 0, post);
+
+    this.service.create(post)
       .subscribe(
-        (response) => {
-          this.posts = response;
+        (newPost) => {
+          post.id = newPost.id;
+          // post.userId = response.userId;
+          input.disabled = false;
+          input.value = "";
+          input.focus();
+          // console.log(createdPost);
+          // console.log(post);
+        },
+        (error: AppError) => {
+          // this.posts.splice(0,1);
+          let index = this.posts.indexOf(post);
+          this.posts.splice(index, 1);
+
+          input.disabled = false;
+          input.focus();
+          if (error instanceof BadInput) {
+            // this.form.setErrors(error.originalError);
+          }
+          else if (error instanceof NotFoundError) {
+            console.log('Not found');
+          }
+          else throw error;
+
+        });
+  }
+
+  updatePost(post: Post) {
+    post.isRead = true;
+    this.service.update(post)
+      .subscribe(
+        (updatedPost) => {
+          console.log(updatedPost);
         },
         (error: AppError) => {
           if (error instanceof BadInput) {
             // this.form.setErrors(error.originalError);
           }
-          if (error instanceof NotFoundError) {
+          else if (error instanceof NotFoundError) {
             console.log('Not found');
           }
-          // alert('Unexpected error!');
-          // console.log(error);
-        },
-        () => {
-          console.log("Finished");
-        });
-  }
+          else throw error;
 
-  createPost(input: HTMLInputElement) {
-    let post: Post = {
-      title: input.value,
-    };
-    input.disabled = true;
-
-    this.service.createPost(post)
-      .subscribe(
-        (response) => {
-          post.id = response.id;
-          // post.userId = response.userId;
-          this.posts.unshift(response);
-          input.disabled = false;
-          input.value = "";
-          input.focus();
-          // console.log(response);
-          // console.log(post);
-        },
-        (error: Response) => {
-          if (error.status === 400) {
-            // this.form.setErrors(error.json());
-          }
-          else {
-
-            console.log("Ein Fehler ist aufgetreten.");
-            alert("Verbindungsprobleme!");
-          }
-          input.disabled = false;
-          input.focus();
-        });
-  }
-
-  updatePost(post: Post) {
-    this.service.updatePost({ isRead: true })
-      .subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          alert('Unexpected error!');
-          console.log(error);
         });
 
     // post.isRead = true;
     // this.http.put<Post>(this.url, post).subscribe(response => {});
   }
+
   deletePost(post: Post) {
-    this.service.deletePost(post.id)
+    let index = this.posts.indexOf(post);
+    this.posts.splice(index, 1);
+
+    this.service.delete(post.id)
       .subscribe(
-        (response) => {
-          let index = this.posts.indexOf(post);
-          this.posts.splice(index, 1);
+        () => {
+          console.log('Successful deleted!');
         },
-        (error: Response) => {
-          if (error.status === 404)
-            alert('This post has not been found on the server.')
-          else
-            alert('Unexpected error!');
-          console.log(error);
+        (error: AppError) => {
+          if (error instanceof NotFoundError) {
+            // console.log('Not found');
+          } else if (error instanceof AppError) {
+            console.log('Undo because of error');
+            this.posts.splice(index, 0, post);
+          }
+          else throw error;
         });
   }
 }
